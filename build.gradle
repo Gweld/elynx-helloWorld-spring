@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.2.2.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.13'
+
+repositories {
+    mavenCentral()
+}
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'hello.world',
+                'Implementation-Version': version,
+                'Main-Class': 'hello.world.HelloWorldApp'
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+dependencies {
+//    compile 'io.spring.dependency-management:1.0.8.RELEASE'
+    compile 'org.springframework.boot:spring-boot-dependencies:2.2.2.RELEASE'
+    compile 'org.springframework.boot:spring-boot-gradle-plugin:2.2.2.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-actuator:2.2.2.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-web:2.2.2.RELEASE'
+    testCompile('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
+
+bootJar {
+    mainClassName = 'hello.world.HelloWorldApp'
+}
+apply plugin: "org.springframework.boot"
+
+test {
+    useJUnitPlatform()
+}
