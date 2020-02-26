@@ -23,7 +23,6 @@ task fatJar(type: Jar) {
 }
 
 dependencies {
-//    compile 'io.spring.dependency-management:1.0.8.RELEASE'
     compile 'org.springframework.boot:spring-boot-dependencies:2.2.2.RELEASE'
     compile 'org.springframework.boot:spring-boot-gradle-plugin:2.2.2.RELEASE'
     compile 'org.springframework.boot:spring-boot-starter-actuator:2.2.2.RELEASE'
